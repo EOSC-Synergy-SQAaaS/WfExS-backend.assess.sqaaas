@@ -1,0 +1,72 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: release/1.7.4
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/inab/WfExS-backend:
+      branch: main
+      repo: https://github.com/inab/WfExS-backend
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/inab/WfExS-backend git:
+        commands:
+        - /usr/bin/env sh .sqa/script.stuffy-ruby-akbash.sh
+        container: qc.acc_tacky-viridian-mist
+  QC.Doc:
+    repos:
+      github.com/inab/WfExS-backend find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.boozy-grey-hamster.sh
+        container: qc.doc_flimsy-amethyst-frog
+      github.com/inab/WfExS-backend git:
+        commands:
+        - /usr/bin/env sh .sqa/script.shaggy-orange-fousek.sh
+        container: qc.doc_skimpy-plum-mule
+      github.com/inab/WfExS-backend markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.scummy-amber-kangaroo.sh
+        container: qc.doc_wimpy-ruby-oyster
+  QC.Lic:
+    repos:
+      github.com/inab/WfExS-backend licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.skimpy-taupe-swan.sh
+        container: qc.lic_craggy-ultramarine-stingray
+  QC.Met:
+    repos:
+      github.com/inab/WfExS-backend cff-converter-python:
+        commands:
+        - /usr/bin/env sh .sqa/script.lanky-corn-tiger.sh
+        container: qc.met_breezy-peach-bat
+  QC.Sec:
+    repos:
+      github.com/inab/WfExS-backend bandit:
+        commands:
+        - /usr/bin/env sh .sqa/script.skinny-puce-nightingale.sh
+        container: qc.sec_flimsy-cinnamon-quetzal
+  QC.Sty:
+    repos:
+      github.com/inab/WfExS-backend flake8:
+        commands:
+        - /usr/bin/env sh .sqa/script.wheezy-magenta-warthog.sh
+        container: qc.sty_hilly-razzmatazz-devil
+      github.com/inab/WfExS-backend jsonlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.squirrely-denim-flounder.sh
+        container: qc.sty_squirrely-razzmatazz-cuttlefish
+      github.com/inab/WfExS-backend stylelint:
+        commands:
+        - /usr/bin/env sh .sqa/script.goopy-brass-tzu.sh
+        container: qc.sty_surly-pumpkin-giraffe
+  QC.Ver:
+    repos:
+      github.com/inab/WfExS-backend get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.messy-maroon-pinscher.sh
+        container: qc.ver_scaly-white-chimpanzee
+timeout: 1800
